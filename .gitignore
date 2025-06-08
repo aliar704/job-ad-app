@@ -1,12 +1,44 @@
-dist/
 
+
+# Node modules
 node_modules/
 
-.env
+# Build output
+dist/
+build/
 
-*.log
+# TypeScript cache
+*.tsbuildinfo
+
+# Logs
 logs/
+*.log
 npm-debug.log*
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# VS Code settings
+.vscode/
+
+# Jest coverage output
+coverage/
+
+# Multer file uploads (like resumes)
+public/uploads/resumes/
+
+# OS-specific
 .DS_Store
 Thumbs.db
+
+# Docker
+*.pid
+*.seed
+docker-compose.override.yml
+
+# Misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
