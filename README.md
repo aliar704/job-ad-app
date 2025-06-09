@@ -306,8 +306,15 @@ Body:
 GET /jobtags  
 Retrieve all job tags.
 
+GET /jobtags/:id
+Retrieve a job ad with full tags name.
+
+GET jobtags/list
+Retrieve all job ads with their tags.
+
 DELETE /jobtags/:id (employer only)  
 Remove a tag from a job ad.
+
 
 ----------------------------
 
