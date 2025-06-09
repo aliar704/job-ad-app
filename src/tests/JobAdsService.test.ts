@@ -142,6 +142,7 @@ describe('JobAdsServices', () => {
       softDeleteJobAd: jest.fn(),
       jobAdOwnershipCheck: jest.fn(),
       getTopJobAdsByApplications: jest.fn(),
+      getJobAdApplications:jest.fn(),
     };
 
     jobTagsRepository = {
@@ -149,6 +150,8 @@ describe('JobAdsServices', () => {
       updateJobTags: jest.fn(),
       listJobTags: jest.fn(),
       hardDeleteJobTag: jest.fn(),
+      jobTagOwnershipCheck:jest.fn(),
+      findJobTag:jest.fn(),
     };
 
     companiesRepository = {

@@ -1,6 +1,6 @@
 import { ICitiesRepository } from '../types/repositories';
 import { NotFoundException } from '../exceptions/not-found-exception';
-import { getOrSetCache } from '../utils/cacheUtils';
+import { getOrSetCache } from '../cache/cacheUtils';
 import { RedisKeys } from '../types/redisKeys';
 import { invalidateAllCitiesCache } from '../cache/citiesCache';
 import { normalizeCityInput } from '../utils/normalizationUtils';

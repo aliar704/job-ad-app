@@ -148,7 +148,35 @@
 <a name='L83'></a><a href='#L83'>83</a>
 <a name='L84'></a><a href='#L84'>84</a>
 <a name='L85'></a><a href='#L85'>85</a>
-<a name='L86'></a><a href='#L86'>86</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -232,16 +260,44 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">export interface CreateJobAdDTO {
   title: string;
   description: string;
   salary_min?: number | null;
-  salary_max?: number| null;
+  salary_max?: number | null;
   type: JobType;
   experience_level: XPLVL;
   company_id: number;
-  tags?: string[] | number[]| null;
+  tags?: string[] | number[] | null;
 }
 export interface UpdateJobAdDTO {
   title?: string;
@@ -259,43 +315,43 @@ export interface JobAd {
   title: string;
   description: string;
   salary_min: number;
-  salary_max: number ;
+  salary_max: number;
   type: JobType;
   experience_level: XPLVL;
   company_id: number;
   city_id: number;
   created_at: Date;
-  deleted_at: Date ;
+  deleted_at: Date;
 }
 export interface MappedJobAd {
-id: number;
+  id: number;
   title: string;
-    description: string;
-    salary_min: number;
-    salary_max: number;
-    type: JobType;
-    experience_level: XPLVL;
-    created_at: Date;
-    deleted_at: Date;
-    employer: {
-      id: number;
-      name: string;
-    },
-    company: {
-      id: number;
-      name: string;
-    },
-    city: {
-      id: number;
-      name: string;
-    },
-    tags: string[];
+  description: string;
+  salary_min: number;
+  salary_max: number;
+  type: JobType;
+  experience_level: XPLVL;
+  created_at: Date;
+  deleted_at: Date;
+  employer: {
+    id: number;
+    name: string;
+  };
+  company: {
+    id: number;
+    name: string;
+  };
+  city: {
+    id: number;
+    name: string;
+  };
+  tags: string[];
 }
 export interface NormalizedJobAdData {
   title?: string;
   description?: string;
   salary_min?: number | null;
-  salary_max?: number| null;
+  salary_max?: number | null;
   type?: JobType;
   experience_level?: XPLVL;
   company_id?: number;
@@ -318,6 +374,34 @@ export enum XPLVL {
   MID = 'mid',
   SENIOR = 'senior',
 }
+&nbsp;
+export interface ResumeInfo {
+  id: number;
+  title: string;
+  content: string;
+  file_url: string;
+}
+&nbsp;
+export interface ApplicantInfo {
+  application_id: number;
+  jobseeker_id: number;
+  full_name: string;
+  resume: ResumeInfo;
+  status: string; // or STATUS enum if consistent
+}
+&nbsp;
+export interface JobAdApplicationsDTO {
+  id: number;
+  title: string;
+  description: string;
+  salary_min: number;
+  salary_max: number;
+  type: JobType;
+  experience_level: XPLVL;
+  created_at: Date;
+  application_count: number;
+  applicants: ApplicantInfo[];
+}
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -325,7 +409,7 @@ export enum XPLVL {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-08T06:25:28.452Z
+                at 2025-06-09T05:39:12.276Z
             </div>
         <script src="../../../prettify.js"></script>
         <script>

@@ -8,7 +8,7 @@ import { CreateJobAdDTO, NormalizedJobAdData, UpdateJobAdDTO } from '../types/da
 import { CreateResumeDTO, UpdateResumeDTO } from '../types/dataTypes/resumeData';
 import { SearchJobAdsDTO } from '../types/dataTypes/searchData';
 import { NormalizedUserInput, Role, SignupDTO, UpdateUserDTO } from '../types/dataTypes/userData';
-
+//user normalization
 export function normalizeSignupInput(data: SignupDTO): NormalizedUserInput {
   return {
     email: data.email.trim().toLowerCase(),
@@ -29,12 +29,16 @@ export function normalizeUserUpdateInput(data: UpdateUserDTO): NormalizedUserInp
     birth_date: data.birth_date ?? undefined,
   };
 }
+
+//city normalization
 export function normalizeCityInput(data: CreateCityDTO): NormalizedCityDTO {
   return {
     name: data.name.trim().toLowerCase(),
     country: data.country?.trim().toLowerCase() || null,
   };
 }
+
+//company normalization
 export function normalizeCreateCompanyInput(data: AddCompanyDTO): NormalizedCompanyInput {
   return {
     name: data.name.trim().toLowerCase(),
@@ -56,6 +60,8 @@ export function normalizeUpdateCompanyInput(data: UpdateCompanyDTO): NormalizedC
     city_id: typeof data.city === 'number' ? data.city : undefined,
   };
 }
+
+//jobad normalization
 export function normalizeCreateJobAdDTO(data: CreateJobAdDTO): NormalizedJobAdData {
   return {
     title: data.title.trim().toLowerCase(),
@@ -79,6 +85,8 @@ export function normalizeUpdateJobAdDTO(data: UpdateJobAdDTO): NormalizedJobAdDa
     company_id: data.company_id ?? undefined,
   };
 }
+
+//search normalization
 export function normalizeSearchJobAdsDTO(data: SearchJobAdsDTO): SearchJobAdsDTO {
   const tags: string[] = [];
   if (data.tags) {
@@ -94,14 +102,16 @@ export function normalizeSearchJobAdsDTO(data: SearchJobAdsDTO): SearchJobAdsDTO
     tags,
   };
 }
-export function normalizeCreateResumeDTO(data: CreateResumeDTO ): CreateResumeDTO {
+
+//resume normalization
+export function normalizeCreateResumeDTO(data: CreateResumeDTO): CreateResumeDTO {
   return {
     title: data.title.trim().toLowerCase(),
     content: data.content.trim().toLowerCase(),
     file_url: data.file_url?.trim().toLowerCase() || null,
   };
 }
-export function normalizeUpdateResumeDTO(data: UpdateResumeDTO ): UpdateResumeDTO {
+export function normalizeUpdateResumeDTO(data: UpdateResumeDTO): UpdateResumeDTO {
   return {
     title: data.title?.trim().toLowerCase(),
     content: data.content?.trim().toLowerCase(),

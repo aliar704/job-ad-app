@@ -7,8 +7,12 @@ export async function createLogsTable(): Promise<void> {
   id SERIAL PRIMARY KEY,
   level TEXT NOT NULL,
   message TEXT NOT NULL,
+  method TEXT,
+  path TEXT,
+  status_code INTEGER,
+  data JSONB,
   meta JSONB,
-  timestamp TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+  timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
     `);
     console.log('logs table created or already exists.');

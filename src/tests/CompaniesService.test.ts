@@ -2,17 +2,22 @@ import CompaniesServices from '../services/CompaniesService';
 import { NotFoundException } from '../exceptions/not-found-exception';
 import { BadRequestException } from '../exceptions/bad-request-exception';
 
-import { getOrSetCache } from '../utils/cacheUtils';
+import { getOrSetCache } from '../cache/cacheUtils';
 import {
   normalizeCreateCompanyInput,
   normalizeUpdateCompanyInput,
 } from '../utils/normalizationUtils';
 import { invalidateAllCompaniesCache } from '../cache/companiesCache';
 import { City } from '../types/dataTypes/cityData';
-import { AddCompanyDTO, Company, MappedCompany, UpdateCompanyDTO } from '../types/dataTypes/companyData';
+import {
+  AddCompanyDTO,
+  Company,
+  MappedCompany,
+  UpdateCompanyDTO,
+} from '../types/dataTypes/companyData';
 
 // Mocks
-jest.mock('../utils/cacheUtils');
+jest.mock('../cache/cacheUtils');
 jest.mock('../utils/normalizationUtils');
 jest.mock('../cache/companiesCache');
 

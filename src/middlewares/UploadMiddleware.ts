@@ -4,7 +4,6 @@ import fs from 'fs';
 import { Request } from 'express';
 
 const resumesUploadDir = path.join(__dirname, '../../public/uploads/resumes');
-
 fs.mkdirSync(resumesUploadDir, { recursive: true });
 
 const storage = multer.diskStorage({

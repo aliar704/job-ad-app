@@ -1,7 +1,7 @@
 import { ICompaniesRepository } from '../types/repositories';
 
 import { NotFoundException } from '../exceptions/not-found-exception';
-import { getOrSetCache } from '../utils/cacheUtils';
+import { getOrSetCache } from '../cache/cacheUtils';
 import { RedisKeys } from '../types/redisKeys';
 import _ from 'lodash';
 import { invalidateAllCompaniesCache } from '../cache/companiesCache';
@@ -11,7 +11,12 @@ import {
   normalizeUpdateCompanyInput,
 } from '../utils/normalizationUtils';
 import { BadRequestException } from '../exceptions/bad-request-exception';
-import { AddCompanyDTO, Company, MappedCompany, UpdateCompanyDTO } from '../types/dataTypes/companyData';
+import {
+  AddCompanyDTO,
+  Company,
+  MappedCompany,
+  UpdateCompanyDTO,
+} from '../types/dataTypes/companyData';
 import { ErrorCode } from '../types/errorCodes';
 import { City } from '../types/dataTypes/cityData';
 import { ConflictException } from '../exceptions/conflict-exception';
@@ -41,9 +46,12 @@ class CompaniesServices {
     const city = await this.resolveCity(data.city);
     data.city = city.id;
     const normalizedData = normalizeCreateCompanyInput(data);
-    const foundCompany = await this.companiesRepository.findCompany(normalizedData.name as string)
-    if (foundCompany){
-      throw new ConflictException('Company with this name already exists',ErrorCode.CONFLICT_EXCEPTION)
+    const foundCompany = await this.companiesRepository.findCompany(normalizedData.name as string);
+    if (foundCompany) {
+      throw new ConflictException(
+        'Company with this name already exists',
+        ErrorCode.CONFLICT_EXCEPTION
+      );
     }
 
     const company = await this.companiesRepository.createCompany(loggedUserId, normalizedData);

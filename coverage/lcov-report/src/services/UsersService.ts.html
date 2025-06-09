@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>22/30</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">42.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>3/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">85.71% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>6/7</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.33% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>22/30</span>
+                <span class='fraction'>30/30</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -131,8 +131,7 @@
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a>
-<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -150,15 +149,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -173,18 +172,17 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">4x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -218,16 +216,16 @@ class UsersServices {
     this.citiesServices = citiesServices;
   }
 &nbsp;
-  private <span class="fstat-no" title="function not covered" >async </span>resolveCity(cityInput: string | number): Promise&lt;City&gt; {
-    let city = <span class="cstat-no" title="statement not covered" >await this.citiesServices.findCity(cityInput);</span>
-<span class="cstat-no" title="statement not covered" >    <span class="missing-if-branch" title="if path not taken" >I</span>if (!city) {</span>
-<span class="cstat-no" title="statement not covered" >      if (typeof cityInput === 'string') {</span>
-<span class="cstat-no" title="statement not covered" >        city = await this.citiesServices.addCity({ name: cityInput.toLowerCase() });</span>
+  private async resolveCity(cityInput: string | number): Promise&lt;City&gt; {
+    let city = await this.citiesServices.findCity(cityInput);
+    if (!city) {
+      if (typeof cityInput === 'string') {
+        city = await this.citiesServices.addCity({ name: cityInput.toLowerCase() });
       } else {
-<span class="cstat-no" title="statement not covered" >        throw new NotFoundException('City not found', ErrorCode.NOT_FOUND_CITY_EXCEPTION);</span>
+        throw new NotFoundException('City not found', ErrorCode.NOT_FOUND_CITY_EXCEPTION);
       }
     }
-<span class="cstat-no" title="statement not covered" >    return city;</span>
+    return city;
   }
   async getUsersList(): Promise&lt;User[]&gt; {
     return this.usersRepository.listUsers();
@@ -242,10 +240,9 @@ class UsersServices {
   }
 &nbsp;
   async updateUserById(loggedUserId: number, data: UpdateUserDTO): Promise&lt;User&gt; {
-    // Optional: check user exists before update
-    <span class="missing-if-branch" title="if path not taken" >I</span>if (data.city) {
-      const city = <span class="cstat-no" title="statement not covered" >await this.resolveCity(data.city);</span>
-<span class="cstat-no" title="statement not covered" >      data.city = city.id;</span>
+    if (data.city) {
+      const city = await this.resolveCity(data.city);
+      data.city = city.id;
     }
     const normalizedData = normalizeUserUpdateInput(data);
 &nbsp;
@@ -277,7 +274,7 @@ export default UsersServices;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-06-08T06:25:28.452Z
+                at 2025-06-09T05:39:12.276Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

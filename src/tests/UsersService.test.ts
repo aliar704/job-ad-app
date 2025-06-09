@@ -3,8 +3,14 @@
 import UsersServices from '../services/UsersService';
 import { IUsersRepository } from '../types/repositories/IUsersRepository';
 import { NotFoundException } from '../exceptions/not-found-exception';
-import { Role, UpdateUserDTO, User } from '../types/dataTypes/userData';
+import { NormalizedUserInput, Role, UpdateUserDTO, User } from '../types/dataTypes/userData';
+import { City } from '../types/dataTypes/cityData';
+import { normalizeCityInput, normalizeUserUpdateInput } from '../utils/normalizationUtils';
 
+jest.mock('../utils/normalizationUtils', () => ({
+  normalizeCityInput: jest.fn(),
+  normalizeUserUpdateInput: jest.fn(),
+}));
 const mockUsersRepo = {
   listUsers: jest.fn(),
   findUser: jest.fn(),
@@ -31,6 +37,11 @@ describe('UsersServices', () => {
     birth_date: new Date(),
     created_at: new Date(),
     deleted_at: null,
+  };
+  const fakeCity: City = {
+    id: 99,
+    name: 'new york',
+    created_at: new Date(),
   };
 
   beforeEach(() => {
@@ -62,26 +73,73 @@ describe('UsersServices', () => {
   describe('updateUserById', () => {
     const updatedUser: User = {
       ...fakeUser,
-      full_name: 'updated name',
+      full_name: 'updated',
     };
-    it('should update and return the user', async () => {
-      const updateData: UpdateUserDTO = { full_name: 'updated name' };
+
+    it('should update and return the user without city change', async () => {
+      const updateData: UpdateUserDTO = { full_name: 'Updated' };
+      const normalizedUpdateData: NormalizedUserInput = { full_name: 'updated' };
+
+      (normalizeUserUpdateInput as jest.Mock).mockReturnValue(normalizedUpdateData);
       mockUsersRepo.findUser.mockResolvedValue(fakeUser);
       mockUsersRepo.updateUser.mockResolvedValue(updatedUser);
 
-      const updated = await userService.updateUserById(1, updateData);
-      expect(updated.full_name).toBe('updated name');
-      expect(mockUsersRepo.updateUser).toHaveBeenCalledWith(1, updateData);
+      const result = await userService.updateUserById(1, updateData);
+      expect(normalizeUserUpdateInput).toHaveBeenCalledWith(updateData);
+      expect(result).toEqual(updatedUser);
+      expect(mockUsersRepo.updateUser).toHaveBeenCalledWith(1, normalizedUpdateData);
+    });
+
+    it('should resolve city by name and add if not found', async () => {
+      const updateData: UpdateUserDTO = { full_name: 'Updated', city: 'new york' };
+      const normalizedUpdateData: NormalizedUserInput = { full_name: 'updated', city_id: 99 };
+
+      (normalizeUserUpdateInput as jest.Mock).mockReturnValue(normalizedUpdateData);
+
+      mockCitiesServices.findCity.mockResolvedValueOnce(null);
+      mockCitiesServices.addCity.mockResolvedValueOnce(fakeCity);
+
+      mockUsersRepo.findUser.mockResolvedValue(fakeUser);
+      mockUsersRepo.updateUser.mockResolvedValue({ ...updatedUser, city_id: 99 });
+
+      const result = await userService.updateUserById(1, updateData);
+      expect(normalizeUserUpdateInput).toHaveBeenCalledWith(updateData);
+
+      expect(mockCitiesServices.findCity).toHaveBeenCalledWith('new york');
+      expect(mockCitiesServices.addCity).toHaveBeenCalledWith({ name: 'new york' });
+      expect(mockUsersRepo.updateUser).toHaveBeenCalledWith(1, normalizedUpdateData);
+      expect(result).toEqual({ ...updatedUser, city_id: 99 });
+    });
+
+    it('should resolve city by ID if it exists', async () => {
+      const updateData: UpdateUserDTO = { full_name: 'Updated', city: 99 };
+      const normalizedUpdateData: NormalizedUserInput = { full_name: 'updated', city_id: 99 };
+      (normalizeUserUpdateInput as jest.Mock).mockReturnValue(normalizedUpdateData);
+
+      mockCitiesServices.findCity.mockResolvedValueOnce(fakeCity);
+      mockUsersRepo.findUser.mockResolvedValue(fakeUser);
+      mockUsersRepo.updateUser.mockResolvedValue({ ...updatedUser, city_id: 99 });
+
+      const result = await userService.updateUserById(1, updateData);
+      expect(normalizeUserUpdateInput).toHaveBeenCalledWith(updateData);
+      expect(mockCitiesServices.findCity).toHaveBeenCalledWith(99);
+      expect(mockUsersRepo.updateUser).toHaveBeenCalledWith(1, normalizedUpdateData);
+
+      expect(result).toEqual({ ...updatedUser, city_id: 99 });
+    });
+
+    it('should throw if city is numeric and not found', async () => {
+      mockCitiesServices.findCity.mockResolvedValueOnce(null);
+      await expect(userService.updateUserById(1, { city: 123 })).rejects.toThrow(NotFoundException);
     });
 
     it('should throw if user not found before update', async () => {
       mockUsersRepo.findUser.mockResolvedValue(null);
-      await expect(userService.updateUserById(1, { full_name: 'fail' })).rejects.toThrow(
+      await expect(userService.updateUserById(2, { full_name: 'fail' })).rejects.toThrow(
         NotFoundException
       );
     });
   });
-
   describe('deleteLoggedUser', () => {
     it('should call softDeleteUser with loggedUserId', async () => {
       const deletedUser: User = {

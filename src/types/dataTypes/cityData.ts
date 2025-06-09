@@ -10,6 +10,6 @@ export interface NormalizedCityDTO {
 export interface City {
   id: number;
   name: string;
-  country: string;
+  country?: string;
   created_at: Date;
 }
