@@ -7,4 +7,6 @@ export interface IJobTagsRepository {
   listJobTags(): Promise<JobTag[]>;
   hardDeleteJobTag(jobAdId: number, tagId: number): Promise<void>;
   jobTagOwnershipCheck(loggedUserId: number, jobAdId: number): Promise<boolean>;
+  getFullJobTag(jobAdId: number): Promise<any | null>
+  listFullJobAdsWithTags(): Promise<any[]>
 }

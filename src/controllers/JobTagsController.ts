@@ -25,6 +25,21 @@ class JobTagsController {
       next(error);
     }
   };
+  getFullJobTag = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const result = await this.jobTagsServices.getFullJobTag(+req.params.id);
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }}
+  getJobAdsWithTags = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const result = await this.jobTagsServices.getAllJobAdsWithTags();
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
+    }
+  };
 
   deleteJobTag = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {

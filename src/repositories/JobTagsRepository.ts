@@ -11,6 +11,33 @@ class JobTagsRepository implements IJobTagsRepository {
     const result = await pool.query(query, values);
     return result.rows[0] || null;
   }
+  async getFullJobTag(jobAdId: number): Promise<any | null> {
+    const query = ` SELECT 
+      ja.*,
+      COALESCE(json_agg(DISTINCT t.name) FILTER (WHERE t.name IS NOT NULL), '[]') AS tags
+    FROM job_ads ja
+    LEFT JOIN job_tags jt ON ja.id = jt.job_ad_id
+    LEFT JOIN tags t ON jt.tag_id = t.id
+    WHERE ja.id = $1
+    GROUP BY ja.id`;
+    const values = [jobAdId];
+    const result = await pool.query(query, values);
+    return result.rows[0] || null;
+  }
+  async listFullJobAdsWithTags(): Promise<any[]> {
+  const query = `
+    SELECT 
+      ja.*,
+      COALESCE(json_agg(DISTINCT t.name) FILTER (WHERE t.name IS NOT NULL), '[]') AS tags
+    FROM job_ads ja
+    LEFT JOIN job_tags jt ON ja.id = jt.job_ad_id
+    LEFT JOIN tags t ON jt.tag_id = t.id
+    WHERE ja.deleted_at IS NULL
+    GROUP BY ja.id
+  `;
+  const result = await pool.query(query);
+  return result.rows;
+}
 
   async addJobTag(jobAdId: number, tagIds: number[]): Promise<void> {
     for (const tagId of tagIds) {

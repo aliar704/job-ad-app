@@ -29,6 +29,16 @@ class JobTagsRoutes {
       authMiddleware.authenticate,
       errorHandler(jobTagsController.getAllJobTags)
     );
+    this.router.get(
+      '/list',
+      authMiddleware.authenticate,
+      errorHandler(jobTagsController.getJobAdsWithTags)
+    );
+    this.router.get(
+      '/:id',
+      authMiddleware.authenticate,
+      errorHandler(jobTagsController.getFullJobTag)
+    );
 
     this.router.delete(
       '/:id',

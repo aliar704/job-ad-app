@@ -60,6 +60,13 @@ class JobTagsServices {
   async getAllJobTags(): Promise<JobTag[]> {
     return this.jobTagsRepository.listJobTags();
   }
+  async getFullJobTag(jobAdId: number): Promise<any> {
+    return this.jobTagsRepository.getFullJobTag(jobAdId);
+  }
+  async getAllJobAdsWithTags(): Promise<any[]> {
+  return this.jobTagsRepository.listFullJobAdsWithTags();
+}
+
 
   async deleteJobTag(loggedUserId:number,jobAdId: number, tagId: number): Promise<void> {
     const isOwner = await this.jobAdsRepository.jobAdOwnershipCheck(loggedUserId,jobAdId)
