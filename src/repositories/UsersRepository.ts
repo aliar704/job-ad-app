@@ -56,7 +56,7 @@ class UsersRepository implements IUsersRepository {
         data.full_name,
         data.role,
         data.phone,
-        data.birth_date || null,
+        data.birth_date,
         data.city_id,
       ];
 

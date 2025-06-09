@@ -4,14 +4,14 @@ import { logger } from '../logger/logger';
 
 export const errorMiddleware = (error: HttpException, req: Request, res: Response, next: NextFunction) => {
   logger.error(error.message, {
-    errorCode: error.errorCode,
-    statusCode: error.statusCode,
+    errorCode: error.errorCode,//meta
+    status_code: error.statusCode,
     path: req.path,
     method: req.method,
-    body: req.body,
-    query: req.query,
-    stack: error.stack,
-    errors: error.errors || null,
+    data: req.body,
+    query: req.query,//meta
+    stack: error.stack,//meta
+    errors: error.errors || null,//meta
   });
 
   res.status(error.statusCode || 500).json({
